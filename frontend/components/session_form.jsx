@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
 
 
 class SessionForm extends React.Component {
@@ -16,13 +16,13 @@ class SessionForm extends React.Component {
 
   handleUsername(e) {
     e.preventDefault();
-    const username = document.getElementById('username').value
+    const username = document.getElementById('username').value;
     this.setState({username});
   }
 
   handlePassword(e) {
     e.preventDefault();
-    const password = document.getElementById('password').value
+    const password = document.getElementById('password').value;
     this.setState({password});
   }
 
@@ -30,16 +30,35 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.processForm(user);
+    this.setState({username: "", password: ""});
+    this.props.history.push("/home");
   }
 
   render(){
+    let text;
+    if (this.props.formType === "login"){
+      text = "Login";
+    } else{
+      text = "Signup";
+    }
     return (
-      <form>
-        <input type='text' onChange={this.handleUsername} value={this.state.username} id='username'></input>
-        <input type='text' onChange={this.handlePassword} value={this.state.password} id='password'></input>
-        <button onClick={this.handleSubmit}>Submit</button>
-      </form>
-    )
+
+      <div>
+        <h1>{text}</h1>
+        <h3>{this.props.errors}</h3>
+        <form>
+          <input type='text' onChange={this.handleUsername}
+            value={this.state.username} id='username'>
+          </input>
+
+          <input type='password' onChange={this.handlePassword}
+            value={this.state.password} id='password'>
+          </input>
+
+          <button onClick={this.handleSubmit}>Submit</button>
+        </form>
+      </div>
+    );
   }
 }
 

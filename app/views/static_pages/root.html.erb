@@ -3,6 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>BenchBnB</title>
+
+    <script type="text/javascript">
+    <% if logged_in? %>
+      window.currentUser = <%= render(
+        "api/users/user.json.jbuilder",
+        user: current_user
+      ).html_safe %>
+      <% end %>
+    </script>
+
   </head>
   <body>
     <main id="root"></main>
