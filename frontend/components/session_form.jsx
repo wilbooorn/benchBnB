@@ -31,7 +31,7 @@ class SessionForm extends React.Component {
     const user = Object.assign({}, this.state);
     this.props.processForm(user);
     this.setState({username: "", password: ""});
-    this.props.history.push("/home");
+    this.props.history.push("/");
   }
 
   render(){
